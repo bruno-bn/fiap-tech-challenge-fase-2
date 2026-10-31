@@ -1,0 +1,349 @@
+{
+  "info": {
+    "_postman_id": "b1b15140-aac3-449d-aa93-68d18cbace57",
+    "name": "FIAP Tech Challenge - Fase 2",
+    "description": "Collection contendo fluxos de sucesso e casos de exceção/validação.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "24044761",
+    "_collection_link": "https://go.postman.co/collection/24044761-b1b15140-aac3-449d-aa93-68d18cbace57?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "1. Tipos de Usuário",
+      "item": [
+        {
+          "name": "Criar Tipo de Usuário",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Gerente\",\n  \"categoria\": \"DONO_RESTAURANTE\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/tipos-usuario",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "tipos-usuario"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Listar Tipos de Usuário",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/tipos-usuario",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "tipos-usuario"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "2. Restaurantes",
+      "item": [
+        {
+          "name": "Criar Restaurante",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Bistrô Francês\",\n  \"endereco\": \"Rua das Flores, 123\",\n  \"tipoCozinha\": \"Francesa\",\n  \"horarioFuncionamento\": \"18h às 23h\",\n  \"donoId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/restaurantes",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "restaurantes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Listar Restaurantes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/restaurantes",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "restaurantes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar Restaurante por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/restaurantes/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "restaurantes",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "3. Itens do Cardápio",
+      "item": [
+        {
+          "name": "Adicionar Item ao Cardápio",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Filé Mignon ao Poivre\",\n  \"descricao\": \"Filé mignon com molho de pimenta preta e purê de batatas\",\n  \"preco\": 120.50,\n  \"apenasNoLocal\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/restaurantes/1/itens",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "restaurantes",
+                "1",
+                "itens"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Listar Itens do Restaurante",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/restaurantes/1/itens",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "restaurantes",
+                "1",
+                "itens"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "4. Casos de Exceção (Validações)",
+      "item": [
+        {
+          "name": "Erro: Criar Restaurante sem Nome (Bean Validation)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"\", \n  \"endereco\": \"Rua das Flores, 123\",\n  \"tipoCozinha\": \"Francesa\",\n  \"horarioFuncionamento\": \"18h às 23h\",\n  \"donoId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/restaurantes",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "restaurantes"
+              ]
+            },
+            "description": "Força um erro de validação (400 Bad Request) por enviar um nome vazio."
+          },
+          "response": []
+        },
+        {
+          "name": "Erro: Criar Restaurante com Dono Inexistente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Bistrô Fantasma\", \n  \"endereco\": \"Rua Inexistente, 0\",\n  \"tipoCozinha\": \"Italiana\",\n  \"horarioFuncionamento\": \"18h às 23h\",\n  \"donoId\": 9999\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/restaurantes",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "restaurantes"
+              ]
+            },
+            "description": "Lança UsuarioNaoEncontradoException, demonstrando validação de banco."
+          },
+          "response": []
+        },
+        {
+          "name": "Erro: Criar Restaurante com Usuário Não Autorizado (Cliente)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Restaurante da Maria\", \n  \"endereco\": \"Rua Cliente, 44\",\n  \"tipoCozinha\": \"Brasileira\",\n  \"horarioFuncionamento\": \"12h às 15h\",\n  \"donoId\": 2\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/restaurantes",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "restaurantes"
+              ]
+            },
+            "description": "Utiliza o donoId = 2 (Maria Souza, que é CLIENTE no V2__insert_initial_data.sql). Dispara UsuarioNaoAutorizadoException."
+          },
+          "response": []
+        },
+        {
+          "name": "Erro: Criar Item com Preço Negativo",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Prato Inválido\",\n  \"descricao\": \"Teste\",\n  \"preco\": -50.00,\n  \"apenasNoLocal\": false\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/restaurantes/1/itens",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "restaurantes",
+                "1",
+                "itens"
+              ]
+            },
+            "description": "Força um erro de domínio (ItemCardapioInvalidoException) ao tentar inserir um preço menor que zero."
+          },
+          "response": []
+        },
+        {
+          "name": "Erro: Adicionar Item em Restaurante Inexistente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Prato Fantasma\",\n  \"descricao\": \"Teste\",\n  \"preco\": 50.00,\n  \"apenasNoLocal\": false\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/restaurantes/9999/itens",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "restaurantes",
+                "9999",
+                "itens"
+              ]
+            },
+            "description": "Força o lançamento da RestauranteNaoEncontradoException."
+          },
+          "response": []
+        },
+        {
+          "name": "Erro: Buscar Item com Inconsistência de IDs (Cruzamento)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/restaurantes/2/itens/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "restaurantes",
+                "2",
+                "itens",
+                "1"
+              ]
+            },
+            "description": "Tenta buscar um item do restaurante 1 passando o restaurante 2 na URL, testando a consistência relacional."
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080/api"
+    }
+  ]
+}
